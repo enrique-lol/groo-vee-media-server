@@ -21,7 +21,7 @@ const router = express.Router()
 // INDEX
 // GET /articles
 router.get('/articles', requireToken, (req, res, next) => {
-  Article.find()
+  Article.find({owner: req.user._id})
     .then(articles => {
       return articles.map(article => article.toObject())
     })
@@ -42,7 +42,7 @@ router.get('/articles/:id', requireToken, (req, res, next) => {
 // POST to /articles
 router.post('/articles', requireToken, (req, res, next) => {
   // owner = user.id
-  req.body.article.owner = req.user.id
+  req.body.article.owner = req.user._id
 
   // model method
   Article.create(req.body.article)

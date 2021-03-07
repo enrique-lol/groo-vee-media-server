@@ -17,7 +17,16 @@ const articleSchema = new mongoose.Schema({
     required: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toObject: {
+    transform: (_doc, article) => {
+      return {
+        id: article._id,
+        title: article.title,
+        content: article.content
+      }
+    }
+  }
 })
 
 // export that thang
