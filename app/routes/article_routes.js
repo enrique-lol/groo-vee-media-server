@@ -21,7 +21,7 @@ const router = express.Router()
 // INDEX
 // GET /articles
 router.get('/articles', requireToken, (req, res, next) => {
-  Article.find({owner: req.user._id})
+  Article.find()
     .then(articles => {
       return articles.map(article => article.toObject())
     })

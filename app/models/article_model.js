@@ -11,6 +11,14 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  authorName: {
+    type: String,
+    required: true
+  },
+  mainImageUrl: {
+    type: String,
+    required: true
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -23,7 +31,9 @@ const articleSchema = new mongoose.Schema({
       return {
         id: article._id,
         title: article.title,
-        content: article.content
+        content: article.content,
+        authorName: article.authorName,
+        mainImageUrl: article.mainImageUrl
       }
     }
   }
