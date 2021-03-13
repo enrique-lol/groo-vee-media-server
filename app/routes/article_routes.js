@@ -20,7 +20,7 @@ const router = express.Router()
 
 // INDEX
 // GET /articles
-router.get('/articles', requireToken, (req, res, next) => {
+router.get('/articles', (req, res, next) => {
   Article.find()
     .then(articles => {
       return articles.map(article => article.toObject())
