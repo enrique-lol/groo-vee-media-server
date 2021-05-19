@@ -55,6 +55,10 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  publishDate: {
+    type: String,
+    required: true
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -78,7 +82,8 @@ const articleSchema = new mongoose.Schema({
         heading4: article.heading4,
         paragraph4: article.paragraph4,
         authorName: article.authorName,
-        mainImageUrl: article.mainImageUrl
+        mainImageUrl: article.mainImageUrl,
+        publishDate: article.publishDate
       }
     }
   }
