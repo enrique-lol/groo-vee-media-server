@@ -19,12 +19,42 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /articles
+// All articles
 router.get('/articles', (req, res, next) => {
   Article.find()
     .then(articles => {
       const array = articles.map(article => article.toObject())
       return array.reverse()
+    })
+    // 200 status B)
+    .then(articles => res.status(200).json({ articles: articles }))
+    .catch(next)
+})
+
+// Get 14 for home
+
+router.get('/first14', (req, res, next) => {
+  Article.find()
+    .then(articles => {
+      const array = articles.map(article => article.toObject())
+      const newArray = array.reverse()
+
+      return newArray.slice(0, 14)
+    })
+    // 200 status B)
+    .then(articles => res.status(200).json({ articles: articles }))
+    .catch(next)
+})
+// Get 14 articles at a time
+
+router.get('/next14', (req, res, next) => {
+  Article.find()
+    .then(articles => {
+      const array = articles.map(article => article.toObject())
+      const newArray = array.reverse()
+
+      const loadCount = req.body.loadCount
+      return newArray.slice((14 * (loadCount - 1)), (14 * loadCount))
     })
     // 200 status B)
     .then(articles => res.status(200).json({ articles: articles }))
