@@ -3,13 +3,37 @@ const mongoose = require('mongoose')
 
 // define an article
 const articleSchema = new mongoose.Schema({
+  thumbnail: {
+    type: String,
+    required: true
+  },
   title: {
+    type: String,
+    required: true
+  },
+  summary: {
+    type: String,
+    required: true
+  },
+  quote: {
+    type: String,
+    required: true
+  },
+  authorName: {
+    type: String,
+    required: true
+  },
+  publishDate: {
     type: String,
     required: true
   },
   intro: {
     type: String,
     required: true
+  },
+  intro2: {
+    type: String,
+    required: false
   },
   img2: {
     type: String,
@@ -47,17 +71,17 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  authorName: {
+  img5: {
     type: String,
-    required: true
+    required: false
   },
-  mainImageUrl: {
+  heading5: {
     type: String,
-    required: true
+    required: false
   },
-  publishDate: {
+  paragraph5: {
     type: String,
-    required: true
+    required: false
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -70,8 +94,14 @@ const articleSchema = new mongoose.Schema({
     transform: (_doc, article) => {
       return {
         id: article._id,
+        thumbnail: article.thumbnail,
         title: article.title,
+        summary: article.summary,
+        quote: article.quote,
+        authorName: article.authorName,
+        publishDate: article.publishDate,
         intro: article.intro,
+        intro2: article.intro2,
         img2: article.img2,
         heading2: article.heading2,
         paragraph2: article.paragraph2,
@@ -81,9 +111,9 @@ const articleSchema = new mongoose.Schema({
         img4: article.img4,
         heading4: article.heading4,
         paragraph4: article.paragraph4,
-        authorName: article.authorName,
-        mainImageUrl: article.mainImageUrl,
-        publishDate: article.publishDate
+        img5: article.img5,
+        heading5: article.heading5,
+        paragraph5: article.paragraph5
       }
     }
   }
