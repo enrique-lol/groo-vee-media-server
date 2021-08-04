@@ -38,8 +38,25 @@ router.get('/first14', (req, res, next) => {
     .then(articles => {
       const array = articles.map(article => article.toObject())
       const newArray = array.reverse()
+      const response = newArray.slice(0, 14)
+      console.log(response)
 
-      return newArray.slice(0, 14)
+      return response
+    })
+    // 200 status B)
+    .then(articles => res.status(200).json({ articles: articles }))
+    .catch(next)
+})
+router.get('/second14', (req, res, next) => {
+  Article.find()
+    .then(articles => {
+      const array = articles.map(article => article.toObject())
+      const newArray = array.reverse()
+      const response = newArray.slice(13, 25)
+      console.log('==================2nd batch ==============')
+      console.log(response)
+
+      return response
     })
     // 200 status B)
     .then(articles => res.status(200).json({ articles: articles }))
