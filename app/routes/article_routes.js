@@ -52,8 +52,8 @@ router.get('/second14', (req, res, next) => {
     .then(articles => {
       const array = articles.map(article => article.toObject())
       const newArray = array.reverse()
-      const response = newArray.slice(13, 25)
-      console.log('==================2nd batch ==============')
+      const response = newArray.slice(14, 25)
+      console.log('================== 2nd batch ==============')
       console.log(response)
 
       return response
