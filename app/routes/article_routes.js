@@ -79,7 +79,7 @@ router.get('/next14', (req, res, next) => {
 })
 
 // SHOW, or GET one by uhhhhhhhhhhh id
-router.get('/articles/:id', requireToken, (req, res, next) => {
+router.get('/articles/:id', (req, res, next) => {
   Article.findById(req.params.id)
     .then(handle404)
     // return as json or whateva
