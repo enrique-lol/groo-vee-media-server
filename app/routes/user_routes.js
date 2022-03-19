@@ -115,6 +115,13 @@ router.post('/saveart', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// SHOW, or GET one by uhhhhhhhhhhh id
+router.get('/getuser/:id', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => res.status(200).json({ user: user.toObject() }))
+    .catch(next)
+})
+
 router.delete('/sign-out', requireToken, (req, res, next) => {
   // create a new random token for the user, invalidating the current one
   req.user.token = null
