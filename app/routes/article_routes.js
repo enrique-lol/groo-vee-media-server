@@ -86,6 +86,29 @@ router.get('/articles/:id', (req, res, next) => {
     .then(article => res.status(200).json({ article: article.toObject() }))
     .catch(next)
 })
+// Get many
+router.get('/select-articles', (req, res, next) => {
+  console.log(req.body)
+  const dataArray = req.params.array
+  // console.log(`reqbodyarray === ${req}`)
+  dataArray.forEach(() => {
+    console.log(Article.findById(req.params.id))
+  })
+    // .then(handle404)
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+// Get many
+// router.get('/articles', (req, res, next) => {
+//   Article.find()
+//     .then(articles => {
+//       const array = articles.map(article => article.toObject())
+//       return array.reverse()
+//     })
+//     // 200 status B)
+//     .then(articles => res.status(200).json({ articles: articles }))
+//     .catch(next)
+// })
 
 // POST to /articles
 router.post('/articles', requireToken, (req, res, next) => {
@@ -94,8 +117,8 @@ router.post('/articles', requireToken, (req, res, next) => {
 
   // model method
   Article.create(req.body.article)
-    .then(article => {
-      res.status(201).json({ article: article.toObject() })
+    .then(savedArticle => {
+      res.status(201).json({ savedArticle: savedArticle.toObject() })
     })
     .catch(next)
 })

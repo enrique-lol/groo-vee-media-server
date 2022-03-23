@@ -100,22 +100,17 @@ router.post('/saveart', requireToken, (req, res, next) => {
   //  define article
   const artToSave = req.body.article
 
-  // need a user - define
-  // User.findById(req.user.id)
-  //   .then(user => {
-  //     user.savedArtIds.push('thiss')
-  //   })
   User.updateOne(
     { _id: req.user.id },
     { $push: { savedArtIds: artToSave } }
   )
-    .then(console.log(req.user))
-    .then(console.log(artToSave))
+    // .then(console.log(req.user))
+    // .then(console.log(artToSave))
     .then(() => res.sendStatus(204))
     .catch(next)
 })
 
-// SHOW, or GET one by uhhhhhhhhhhh id
+// GET one
 router.get('/getuser/:id', (req, res, next) => {
   User.findById(req.params.id)
     .then(user => res.status(200).json({ user: user.toObject() }))
